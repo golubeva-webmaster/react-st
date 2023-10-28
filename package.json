@@ -12,7 +12,8 @@
     "format:fix": "prettier . --write",
     "format:check": "prettier . --check",
     "test": "console.log('!!!-test-!!!')",
-    "foo": "console.log('!!!-foo-!!!')"
+    "foo": "console.log('!!!-foo-!!!')",
+    "prepare": "husky install"
   },
   "dependencies": {
     "react": "^18.2.0",
