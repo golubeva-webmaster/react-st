@@ -1,0 +1,40 @@
+.card {
+  border-left: 6px solid #5ac8fa;
+  border-right: 6px solid #5ac8fa;
+  border-bottom: 4px solid #34aadc;
+  border-top: 4px solid #34aadc;
+  background: #eee;
+  display: inline-block;
+  padding: 40px;
+  font-size: 20px;
+  color: #333;
+  width: 330px;
+  height: 150px;
+  text-align: center;
+  vertical-align: middle;
+  font-family: 'Lato', sans-serif;
+  border-radius: 15px 15px 15px 15px;
+  margin: 20px;
+  padding-bottom: 2px solid #ddd;
+  text-align: left;
+
+  /*NOTE - Declare transition here! */
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #ddd;
+    border-radius: 50px 15px 15px 15px;
+  }
+  &:active {
+    background: #aaa;
+  }
+}
+
+b {
+  color: #222;
+  font-family: 'Lato', black;
+  font-size: 40px;
+}
