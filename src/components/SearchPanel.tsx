@@ -1,27 +1,22 @@
 import { Component } from 'react';
 import './SearchPanel.css';
-import Icon from './Icon';
-import React from 'react';
 import { ISearchPanel } from '../types';
+import Button from './Button';
 
 export default class SearchPanel extends Component<ISearchPanel> {
-  constructor(props: ISearchPanel | Readonly<ISearchPanel>) {
-    super(props);
-  }
-
   render() {
+    const { searchQuery, handleInputChange, onSubmit } = this.props;
     return (
       <>
-        <form className="search-container">
+        <form className="search-container" onSubmit={onSubmit}>
           <input
             type="text"
             id="search-bar"
-            placeholder="What do you want to find?"
-            value={this.props.searchQuery}
+            placeholder={searchQuery}
+            value={searchQuery}
+            onChange={handleInputChange}
           />
-          {/* onChange={this.props.updateInput} */}
-          <Icon icon="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png" />
-          {/* onClick={this.props.searchButtonClick} */}
+          <Button text="🔍" />
         </form>
       </>
     );

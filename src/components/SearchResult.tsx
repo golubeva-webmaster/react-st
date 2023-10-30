@@ -1,18 +1,29 @@
 import { Component } from 'react';
-import React from 'react';
-
-interface ISearchResult {
-  searchValue: string;
-}
+import { ISearchResult } from '../types';
 
 export default class SearchResult extends Component<ISearchResult> {
-  searchValue: string;
-  constructor(props: ISearchResult | Readonly<ISearchResult>) {
-    super(props);
-    this.searchValue = this.props.searchValue;
-  }
-
   render() {
-    return <>comp searchResult searchValue: {this.props.searchValue}</>;
+    const { data } = this.props;
+    return (
+      <div className="col">
+        {data.map((item) => (
+          <div className="card" key={item.uid}>
+            <b>{item.title}</b>
+            <ul>
+              <li>
+                {item.numberOfPages
+                  ? `Number of pages: ${item.numberOfPages}`
+                  : ''}
+              </li>
+              <li>
+                {item.numberOfPages
+                  ? `Published date: ${item.publishedDay}-${item.publishedMonth}-${item.publishedYear}`
+                  : ''}
+              </li>
+            </ul>
+          </div>
+        ))}
+      </div>
+    );
   }
 }

@@ -2,12 +2,7 @@ import './App.css';
 import PageMain from './components/PageMain';
 
 function App() {
-  return (
-    <>
-      test
-      <PageMain />
-    </>
-  );
+  return <PageMain />;
 }
 
 export default App;

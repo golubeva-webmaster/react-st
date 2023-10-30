@@ -28,12 +28,20 @@ export interface IItem {
 
 export interface ISearchPanel {
   searchQuery: string;
-  // updateInput: () => void;
-  // searchButtonClick: () => void;
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: () => void;
 }
 
 export interface IState {
   searchQuery: string;
   items: Array<IItem>;
   isLoading: boolean;
+}
+
+export interface IButtonProps {
+  text: string;
+}
+
+export interface ISearchResult {
+  data: Array<IItem>;
 }
