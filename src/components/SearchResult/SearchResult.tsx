@@ -1,13 +1,14 @@
 import { Component } from 'react';
-import { ISearchResult } from '../types';
+import { ISearchResult } from '../../types';
+import classes from './SearchResult.module.scss';
 
 export default class SearchResult extends Component<ISearchResult> {
   render() {
     const { data } = this.props;
     return (
-      <div className="col">
+      <div className={classes.col}>
         {data.map((item) => (
-          <div className="card" key={item.id}>
+          <div className={classes.card} key={item.id}>
             <b>{item.name}</b>
             <ul>
               {/* <li>

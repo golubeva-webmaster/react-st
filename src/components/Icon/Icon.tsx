@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import './Icon.css';
+import classes from './Icon.module.scss';
 
 interface IIcon {
   onClick?: () => void;
@@ -10,8 +10,8 @@ export default class Icon extends Component<IIcon> {
   render() {
     const { onClick, icon } = this.props;
     return (
-      <a onClick={onClick} className="button">
-        <img className="search-icon" src={icon} />
+      <a onClick={onClick} className={classes.button}>
+        <img className={classes['search-icon']} src={icon} />
       </a>
     );
   }

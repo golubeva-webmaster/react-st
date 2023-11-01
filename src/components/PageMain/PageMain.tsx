@@ -1,9 +1,9 @@
-import SearchPanel from './SearchPanel';
-import SearchResult from './SearchResult';
+import SearchPanel from '../SearchPanel/SearchPanel';
+import SearchResult from '../SearchResult/SearchResult';
 import React from 'react';
-import { IState } from '../types';
-import Loader from './Loader';
-import ApiClient from '../utils/FetchData';
+import { IState } from '../../types';
+import Loader from '../Loader/Loader';
+import ApiClient from '../../utils/FetchData';
 
 interface I {}
 
@@ -51,18 +51,15 @@ export default class PageMain extends React.Component {
   };
 
   render() {
+    const { isLoading, searchQuery, items } = this.state;
     return (
       <>
         <SearchPanel
           onSubmit={this.onSubmit}
           handleInputChange={this.handleInputChange}
-          searchQuery={this.state.searchQuery}
+          searchQuery={searchQuery}
         />
-        {this.state.isLoading ? (
-          <Loader />
-        ) : (
-          <SearchResult data={this.state.items} />
-        )}
+        {isLoading ? <Loader /> : <SearchResult data={items} />}
       </>
     );
   }

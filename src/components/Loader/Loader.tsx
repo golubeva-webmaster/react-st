@@ -1,10 +1,11 @@
 import { Component } from 'react';
-import './Loader.css';
+import classes from './Loader.module.scss';
 
 export default class Loader extends Component {
   render() {
     return (
-      <div className="loader loader--style1" title="0">
+      <div className={classes.loader} title="0">
+        {/* loader--style1 */}
         <svg
           version="1.1"
           id="loader-1"
