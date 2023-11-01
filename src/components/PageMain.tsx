@@ -1,43 +1,48 @@
 import SearchPanel from './SearchPanel';
 import SearchResult from './SearchResult';
 import React from 'react';
-import { IState, IItem } from '../types';
+import { IState } from '../types';
 import Loader from './Loader';
+import ApiClient from '../utils/FetchData';
 
 interface I {}
 
 export default class PageMain extends React.Component {
   state: IState;
+  private apiClient: ApiClient;
   constructor(props: I | Readonly<I>) {
     super(props);
+    this.apiClient = new ApiClient();
     this.state = {
       searchQuery: localStorage.getItem('searchQuery') ?? '',
       items: [],
       isLoading: true,
+      hasError: false,
     };
   }
 
   async componentDidMount() {
     const { searchQuery } = this.state;
-    await this.fetchData(searchQuery || '');
-  }
-
-  async fetchData(query: string) {
     this.setState({ items: [], isLoading: true });
-    fetch('https://stapi.co/api/v2/rest/book/search')
-      .then((res) => res.json())
-      .then((json) => {
-        const select = query
-          ? json.books.filter((el: IItem) => el.title.includes(query))
-          : json.books;
-        this.setState({ items: select });
-        this.setState({ isLoading: false });
-      });
+    this.getData(searchQuery);
   }
 
   onSubmit = () => {
     localStorage.setItem('searchQuery', this.state.searchQuery);
-    this.fetchData(this.state.searchQuery);
+    this.getData(this.state.searchQuery);
+  };
+
+  getData = async (searchQuery: string) => {
+    try {
+      const fetchedData = await this.apiClient.getData(searchQuery);
+      if (fetchedData) {
+        this.setState({ items: fetchedData, isLoading: false });
+        console.log(fetchedData);
+      }
+    } catch (e) {
+      this.setState({ isLoading: false });
+      console.error(e);
+    }
   };
 
   handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

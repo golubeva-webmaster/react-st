@@ -7,10 +7,10 @@ export default class SearchResult extends Component<ISearchResult> {
     return (
       <div className="col">
         {data.map((item) => (
-          <div className="card" key={item.uid}>
-            <b>{item.title}</b>
+          <div className="card" key={item.id}>
+            <b>{item.name}</b>
             <ul>
-              <li>
+              {/* <li>
                 {item.numberOfPages
                   ? `Number of pages: ${item.numberOfPages}`
                   : ''}
@@ -19,7 +19,7 @@ export default class SearchResult extends Component<ISearchResult> {
                 {item.numberOfPages
                   ? `Published date: ${item.publishedDay}-${item.publishedMonth}-${item.publishedYear}`
                   : ''}
-              </li>
+              </li> */}
             </ul>
           </div>
         ))}

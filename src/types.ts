@@ -1,30 +1,4 @@
-export interface IItem {
-  anthology: boolean;
-  audiobook: boolean;
-  audiobookAbridged: boolean;
-  audiobookPublishedDay: number;
-  audiobookPublishedMonth: number;
-  audiobookPublishedYear: number;
-  audiobookRunTime: number;
-  biographyBook: boolean;
-  ebook: boolean;
-  novel: boolean;
-  novelization: boolean;
-  numberOfPages: number;
-  productionNumber: number;
-  publishedDay: number;
-  publishedMonth: number;
-  publishedYear: number;
-  referenceBook: boolean;
-  rolePlayingBook: boolean;
-  stardateFrom: number;
-  stardateTo: number;
-  title: string;
-  uid: string;
-  unauthorizedPublication: boolean;
-  yearFrom: number;
-  yearTo: number;
-}
+import { ReactNode } from 'react';
 
 export interface ISearchPanel {
   searchQuery: string;
@@ -34,8 +8,9 @@ export interface ISearchPanel {
 
 export interface IState {
   searchQuery: string;
-  items: Array<IItem>;
+  items: Array<ResponseItem>;
   isLoading: boolean;
+  hasError: boolean;
 }
 
 export interface IButtonProps {
@@ -43,5 +18,43 @@ export interface IButtonProps {
 }
 
 export interface ISearchResult {
-  data: Array<IItem>;
+  data: Array<ResponseItem>;
+}
+
+export interface ErrorState {
+  hasError: boolean;
+}
+
+export interface ErrorProps {
+  children: ReactNode;
+}
+
+export type ApiResponse = {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: ResponseItem[] | [];
+  user_platforms: boolean;
+};
+
+export type ResponseItem = {
+  id: number;
+  slug: string;
+  name: string;
+  description: string;
+  background_image: string;
+  metacritic: number;
+  metacritic_url: string;
+  genres: Genres[];
+  platforms: Platforms<Genres>[];
+};
+
+interface Genres {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+interface Platforms<T> {
+  platform: T;
 }
