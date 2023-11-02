@@ -8,17 +8,13 @@ export interface ISearchPanel {
 
 export interface IState {
   searchQuery: string;
-  items: Array<ResponseItem>;
+  items: IResponseItem[];
   isLoading: boolean;
   hasError: boolean;
 }
 
 export interface IButtonProps {
   text: string;
-}
-
-export interface ISearchResult {
-  data: Array<ResponseItem>;
 }
 
 export interface ErrorState {
@@ -29,32 +25,30 @@ export interface ErrorProps {
   children: ReactNode;
 }
 
-export type ApiResponse = {
+export type IApiResponse = {
   count: number;
   next: string | null;
   previous: string | null;
-  results: ResponseItem[] | [];
+  results: IResponseItem[] | [];
   user_platforms: boolean;
 };
 
-export type ResponseItem = {
+export type IResponseItem = {
   id: number;
   slug: string;
   name: string;
   description: string;
   background_image: string;
-  metacritic: number;
-  metacritic_url: string;
-  genres: Genres[];
-  platforms: Platforms<Genres>[];
+  genres: IGenres[];
+  platforms: IPlatforms<IGenres>[];
 };
 
-interface Genres {
+interface IGenres {
   id: number;
   name: string;
   slug: string;
 }
 
-interface Platforms<T> {
+interface IPlatforms<T> {
   platform: T;
 }

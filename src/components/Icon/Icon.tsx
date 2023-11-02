@@ -1,18 +1,11 @@
-import { Component } from 'react';
 import classes from './Icon.module.scss';
 
-interface IIcon {
-  onClick?: () => void;
-  icon: string;
-}
+const Icon = ({ onClick = () => {}, icon = '' }) => {
+  return (
+    <a onClick={onClick} className={classes.button}>
+      <img className={classes['search-icon']} src={icon} />
+    </a>
+  );
+};
 
-export default class Icon extends Component<IIcon> {
-  render() {
-    const { onClick, icon } = this.props;
-    return (
-      <a onClick={onClick} className={classes.button}>
-        <img className={classes['search-icon']} src={icon} />
-      </a>
-    );
-  }
-}
+export default Icon;
