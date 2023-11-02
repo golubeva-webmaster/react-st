@@ -3,7 +3,7 @@ import Button from '../Button/Button';
 
 const SearchPanel = ({
   searchQuery = '',
-  handleInputChange = () => {},
+  handleInputChange = () => {}, //e: React.ChangeEvent<HTMLInputElement>
   onSubmit = () => {},
 }) => {
   return (

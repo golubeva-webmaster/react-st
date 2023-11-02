@@ -4,6 +4,7 @@ import Loader from '../Loader/Loader';
 import { getDataFromApi } from '../../utils/FetchData';
 import SearchResult from '../SearchResult/SearchResult';
 import { IResponseItem } from '../../types';
+import './PageMain.module.scss';
 
 const PageMain = () => {
   const [searchQuery, setSearchQuery] = useState(
@@ -39,18 +40,25 @@ const PageMain = () => {
   };
 
   return (
-    <>
-      <SearchPanel
-        onSubmit={onSubmit}
-        handleInputChange={handleInputChange}
-        searchQuery={searchQuery}
-      />
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <SearchResult items={items as IResponseItem[]} />
-      )}
-    </>
+    <div className="wrapper">
+      {/* <h1>List of games</h1> */}
+      {/* <header>HEADER</header> */}
+      <div className="wrapper-content">
+        <nav>
+          <SearchPanel
+            onSubmit={onSubmit}
+            handleInputChange={handleInputChange}
+            searchQuery={searchQuery}
+          />
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <SearchResult items={items as IResponseItem[]} />
+          )}
+        </nav>
+        <section>SECTION</section>
+      </div>
+    </div>
   );
 };
 

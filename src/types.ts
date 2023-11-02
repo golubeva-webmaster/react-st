@@ -41,7 +41,17 @@ export type IResponseItem = {
   background_image: string;
   genres: IGenres[];
   platforms: IPlatforms<IGenres>[];
+  tags: ITag[];
 };
+
+export interface ITag {
+  games_count: number;
+  id: number;
+  image_background: string;
+  language: string;
+  name: string;
+  slug: string;
+}
 
 interface IGenres {
   id: number;
