@@ -4,11 +4,10 @@ import Button from '../Button/Button';
 const SearchPanel = ({
   searchQuery = '',
   handleInputChange = () => {}, //e: React.ChangeEvent<HTMLInputElement>
-  onSubmit = () => {},
 }) => {
   return (
     <>
-      <form className={classes.container} onSubmit={onSubmit}>
+      <form className={classes.container}>
         <input
           type="text"
           id="search-bar"

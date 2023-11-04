@@ -43,6 +43,31 @@ export type IResponseItem = {
   platforms: IPlatforms<IGenres>[];
   tags: ITag[];
 };
+export type IResponseItemDetail = {
+  id: number;
+  slug?: string;
+  name?: string;
+  name_original?: string;
+  description?: string;
+  metacritic?: number;
+  metacritic_platforms?: {
+    metascore: number;
+    url: string;
+    platform: {
+      platform: number;
+      name: string;
+      slug: string;
+    };
+  }[];
+  released?: string;
+  tba?: false;
+  updated?: string;
+  background_image?: string;
+  background_image_additional?: string;
+  website?: string;
+  rating?: number;
+  rating_top?: number;
+};
 
 export interface ITag {
   games_count: number;

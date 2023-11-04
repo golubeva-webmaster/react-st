@@ -1,17 +1,30 @@
 import SearchPanel from '../SearchPanel/SearchPanel';
 import React, { useEffect, useState } from 'react';
 import Loader from '../Loader/Loader';
-import { getDataFromApi } from '../../utils/FetchData';
+import { getList, getItem } from '../../utils/FetchData';
 import SearchResult from '../SearchResult/SearchResult';
-import { IResponseItem } from '../../types';
+import { IResponseItem, IResponseItemDetail } from '../../types';
 import './PageMain.module.scss';
+import Detail from '../Detail/Detail';
+
+// import {
+//   createBrowserRouter,
+//   createRoutesFromElements,
+//   Route,
+//   RouterProvider,
+// } from 'react-router-dom';
 
 const PageMain = () => {
+  //   Vladislav(@chervyakov-vladislav) — Сегодня, в 9:03
+  // const StateContext = React.createContext<тип данных>(данные);
+  // получение: Хук юз контект вернет значение, можете записать его в переменную
   const [searchQuery, setSearchQuery] = useState(
     localStorage.getItem('searchQuery') ?? ''
   );
   const [items, setItems] = useState([{}]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isDetailLoading, setIsDetailLoading] = useState(false);
+  const [currentItem, setCurrentItem] = useState({ id: 0 });
 
   useEffect(() => {
     getData(searchQuery);
@@ -19,13 +32,27 @@ const PageMain = () => {
 
   const getData = async (search: string) => {
     try {
-      const fetchedData = await getDataFromApi(search);
+      const fetchedData = await getList(search);
       if (fetchedData) {
         setItems(fetchedData);
         setIsLoading(false);
       }
     } catch (e) {
       setIsLoading(false);
+      console.error(e);
+    }
+  };
+
+  const onItemClick = async (id: number) => {
+    try {
+      setIsDetailLoading(true);
+      const fetchedData = await getItem(id);
+      if (fetchedData) {
+        setCurrentItem(fetchedData);
+        setIsDetailLoading(false);
+      }
+    } catch (e) {
+      setIsDetailLoading(false);
       console.error(e);
     }
   };
@@ -39,12 +66,17 @@ const PageMain = () => {
     setSearchQuery(searchQuery);
   };
 
+  const clearButtonClick = () => {
+    setCurrentItem({ id: 0 });
+  };
+
   return (
     <div className="wrapper">
       {/* <h1>List of games</h1> */}
       {/* <header>HEADER</header> */}
       <div className="wrapper-content">
         <nav>
+          <button onClick={clearButtonClick}>clear detail info</button>
           <SearchPanel
             onSubmit={onSubmit}
             handleInputChange={handleInputChange}
@@ -53,10 +85,23 @@ const PageMain = () => {
           {isLoading ? (
             <Loader />
           ) : (
-            <SearchResult items={items as IResponseItem[]} />
+            <SearchResult
+              items={items as IResponseItem[]}
+              onItemClick={onItemClick}
+            />
           )}
         </nav>
-        <section>SECTION</section>
+        <section>
+          {currentItem.id ? (
+            isDetailLoading ? (
+              <Loader />
+            ) : (
+              <Detail item={currentItem as IResponseItemDetail} />
+            )
+          ) : (
+            ''
+          )}
+        </section>
       </div>
     </div>
   );
