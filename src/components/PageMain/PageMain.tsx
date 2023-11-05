@@ -1,11 +1,11 @@
 import SearchPanel from '../SearchPanel/SearchPanel';
 import React, { useEffect, useState } from 'react';
 import Loader from '../Loader/Loader';
-import { getList, getItem } from '../../utils/FetchData';
+import { getList } from '../../utils/FetchData';
 import SearchResult from '../SearchResult/SearchResult';
-import { IResponseItem, IResponseItemDetail } from '../../types';
-import './PageMain.module.scss';
-import Detail from '../Detail/Detail';
+import { IResponseItem } from '../../types';
+import classes from './PageMain.module.scss';
+import { Outlet, NavLink } from 'react-router-dom';
 
 // import {
 //   createBrowserRouter,
@@ -15,16 +15,11 @@ import Detail from '../Detail/Detail';
 // } from 'react-router-dom';
 
 const PageMain = () => {
-  //   Vladislav(@chervyakov-vladislav) — Сегодня, в 9:03
-  // const StateContext = React.createContext<тип данных>(данные);
-  // получение: Хук юз контект вернет значение, можете записать его в переменную
   const [searchQuery, setSearchQuery] = useState(
     localStorage.getItem('searchQuery') ?? ''
   );
   const [items, setItems] = useState([{}]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isDetailLoading, setIsDetailLoading] = useState(false);
-  const [currentItem, setCurrentItem] = useState({ id: 0 });
 
   useEffect(() => {
     getData(searchQuery);
@@ -43,20 +38,6 @@ const PageMain = () => {
     }
   };
 
-  const onItemClick = async (id: number) => {
-    try {
-      setIsDetailLoading(true);
-      const fetchedData = await getItem(id);
-      if (fetchedData) {
-        setCurrentItem(fetchedData);
-        setIsDetailLoading(false);
-      }
-    } catch (e) {
-      setIsDetailLoading(false);
-      console.error(e);
-    }
-  };
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
   };
@@ -66,17 +47,15 @@ const PageMain = () => {
     setSearchQuery(searchQuery);
   };
 
-  const clearButtonClick = () => {
-    setCurrentItem({ id: 0 });
-  };
-
   return (
-    <div className="wrapper">
-      {/* <h1>List of games</h1> */}
-      {/* <header>HEADER</header> */}
-      <div className="wrapper-content">
+    <div className={classes.wrapper}>
+      {/* <h1>List of games</h1>
+      <header>HEADER</header> */}
+      <div className={classes['wrapper-content']}>
         <nav>
-          <button onClick={clearButtonClick}>clear detail info</button>
+          <NavLink to="/">
+            <button>clear detail info</button>
+          </NavLink>
           <SearchPanel
             onSubmit={onSubmit}
             handleInputChange={handleInputChange}
@@ -85,22 +64,11 @@ const PageMain = () => {
           {isLoading ? (
             <Loader />
           ) : (
-            <SearchResult
-              items={items as IResponseItem[]}
-              onItemClick={onItemClick}
-            />
+            <SearchResult items={items as IResponseItem[]} />
           )}
         </nav>
         <section>
-          {currentItem.id ? (
-            isDetailLoading ? (
-              <Loader />
-            ) : (
-              <Detail item={currentItem as IResponseItemDetail} />
-            )
-          ) : (
-            ''
-          )}
+          <Outlet />
         </section>
       </div>
     </div>

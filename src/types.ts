@@ -48,7 +48,7 @@ export type IResponseItemDetail = {
   slug?: string;
   name?: string;
   name_original?: string;
-  description?: string;
+  description_raw?: string;
   metacritic?: number;
   metacritic_platforms?: {
     metascore: number;
@@ -67,6 +67,7 @@ export type IResponseItemDetail = {
   website?: string;
   rating?: number;
   rating_top?: number;
+  added: number;
 };
 
 export interface ITag {

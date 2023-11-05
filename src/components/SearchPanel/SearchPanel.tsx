@@ -5,6 +5,9 @@ const SearchPanel = ({
   searchQuery = '',
   handleInputChange = () => {}, //e: React.ChangeEvent<HTMLInputElement>
 }) => {
+  const onSubmit = () => {
+    localStorage.setItem('searchQuery', searchQuery);
+  };
   return (
     <>
       <form className={classes.container}>
@@ -16,7 +19,7 @@ const SearchPanel = ({
           value={searchQuery}
           onChange={handleInputChange}
         />
-        <Button text="🔍" />
+        <Button text="🔍" onSubmit={onSubmit} />
       </form>
     </>
   );

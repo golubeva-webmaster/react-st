@@ -1,8 +1,8 @@
 import classes from './Button.module.scss';
 
-const Button = ({ text = '' }) => {
+const Button = ({ text = '', onSubmit = () => {} }) => {
   return (
-    <button className={classes.searchButton} type="submit">
+    <button className={classes.searchButton} type="submit" onClick={onSubmit}>
       {text}
     </button>
   );

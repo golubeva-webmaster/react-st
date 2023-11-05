@@ -10,10 +10,10 @@ const Tags = (props: { items: ITag[] }): ReactElement => {
         {props.items.map((item: ITag) => {
           return (
             <li key={item.id}>
-              <a href="#">
+              <p className={classes.link} href="#">
                 {item.name}
                 <span>{item.games_count}</span>
-              </a>
+              </p>
             </li>
           );
         })}
