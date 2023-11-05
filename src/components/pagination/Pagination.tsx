@@ -2,51 +2,62 @@ import { NavLink } from 'react-router-dom';
 import classes from './Pagination.module.scss';
 import { ChangeEvent } from 'react';
 
-// const Pagination = () => {
-const Pagination = (props: { onChange: (count: number) => void }) => {
-  const { onChange } = props;
+const Pagination = (props: {
+  onChange: (count: number) => void;
+  pagesCount: number;
+  page: number;
+  itemsPerPage: number;
+  paginationClick: () => void;
+}) => {
+  const { onChange, pagesCount, page, itemsPerPage, paginationClick } = props;
 
   const onChangeValue = (e: ChangeEvent<HTMLSelectElement>) => {
     onChange(Number(e.target.value));
   };
 
+  const pages = [];
+  for (let i = 1; i < pagesCount; i++) {
+    if (
+      [1, page - 2, page - 1, page, page + 1, page + 2].includes(i) ||
+      [pagesCount, pagesCount - 1, pagesCount - 2].includes(i)
+    ) {
+      pages.push(
+        <NavLink
+          to={{
+            pathname: '/',
+            search: `?page=${i}`,
+          }}
+          className={
+            i === page
+              ? [classes.pagination_link, classes.pagination_link_active].join(
+                  ' '
+                )
+              : classes.pagination_link
+          }
+          key={i}
+          onClick={paginationClick}
+        >
+          {i}
+        </NavLink>
+      );
+    }
+    if ([page - 3, page + 3].includes(i)) {
+      pages.push('...');
+    }
+  }
+
   return (
     <>
       <nav className={classes.pagination} role="navigation">
-        <NavLink
-          className={[classes.pagination_link, classes.prev].join(' ')}
-          to="/"
-        ></NavLink>
-        <NavLink to="/" className={classes.pagination_link}>
-          1
-        </NavLink>
-        <NavLink to="/" className={classes.pagination_link}>
-          2
-        </NavLink>
-        <NavLink
-          to="/"
-          className={[classes.pagination_link, classes.active].join(' ')}
-        >
-          3
-        </NavLink>
-        <NavLink to="/" className={classes.pagination_link}>
-          4
-        </NavLink>
-        <NavLink to="/" className={classes.pagination_link}>
-          5
-        </NavLink>
-        <NavLink
-          to="/"
-          className={[classes.pagination_link, classes.next].join(' ')}
-        ></NavLink>
+        {pages}
 
         <select
           name="count"
           id="pet-select"
           className={classes.pagination_select}
           onChange={onChangeValue}
+          value={itemsPerPage}
         >
-          <option value="5">2</option>
           <option value="5">5</option>
           <option value="10">10</option>
           <option value="15">15</option>

@@ -23,17 +23,6 @@ section {
   width: 100%;
 }
 
-// @media screen and (min-width: 800px) {
-//   nav,
-//   section {
-//     float: left;
-//   }
-
-//   nav {
-//     margin-right: 10px;
-//   }
-// }
-
 @media screen and (min-width: 1000px) {
   .wrapper {
     width: 960px;
@@ -126,7 +115,6 @@ section {
 
 b {
   color: #222;
-  // font-family: 'Lato', black;
   font-size: 18px;
 }
 
