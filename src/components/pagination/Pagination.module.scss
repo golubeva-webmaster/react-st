@@ -1,0 +1,76 @@
+// @import "compass/css3";
+
+// variables
+$link-color: #333;
+$link-bg-hover: #f20081;
+$link-bg-active: adjust-hue($link-bg-hover, -136%);
+$font-stack: 'helvetica neue', helvetica, arial, sans-serif;
+$inset-text: 0 1px 1px rgba(white, 0.72);
+
+// pagination styles
+.pagination {
+  font-weight: bold;
+  font-size: 16px;
+  font-family: $font-stack;
+  display: flex;
+  flex-direction: row;
+  padding-top: 15px;
+
+  .pagination_select,
+  .pagination_link {
+    padding: 5px 10px;
+    border: 1px solid lighten(black, 15%);
+    border-radius: 3px;
+    box-shadow:
+      0 0 6px rgba(black, 0.6),
+      inset 0 1px rgba(white, 0.4);
+    color: $link-color;
+    text-decoration: none;
+    text-shadow: $inset-text;
+    margin: 2px;
+  }
+  .pagination_link {
+    &:hover {
+      color: darken($link-bg-hover, 40%);
+    }
+
+    &.active {
+      color: darken($link-bg-active, 40%);
+
+      &:hover {
+        cursor: default;
+      }
+    }
+  }
+
+  .prev {
+    &:before {
+      content: '« ';
+      font-weight: normal;
+    }
+  }
+
+  .next {
+    &:after {
+      content: ' »';
+      font-weight: normal;
+    }
+  }
+
+  .next,
+  .prev {
+    &:hover {
+      border-color: lighten(black, 8%);
+      background: linear-gradient(
+        top,
+        lighten(black, 15%),
+        lighten(black, 10%)
+      );
+      box-shadow:
+        0 0 6px rgba(black, 0.6),
+        inset 0 1px rgba(white, 0.1);
+      color: darken(white, 8%);
+      text-shadow: none;
+    }
+  }
+}

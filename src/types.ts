@@ -49,16 +49,6 @@ export type IResponseItemDetail = {
   name?: string;
   name_original?: string;
   description_raw?: string;
-  metacritic?: number;
-  metacritic_platforms?: {
-    metascore: number;
-    url: string;
-    platform: {
-      platform: number;
-      name: string;
-      slug: string;
-    };
-  }[];
   released?: string;
   tba?: false;
   updated?: string;
