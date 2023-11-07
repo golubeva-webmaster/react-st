@@ -1,18 +1,20 @@
 import { NavLink } from 'react-router-dom';
 import classes from './Pagination.module.scss';
 import { ChangeEvent } from 'react';
+import { Context } from '../../contexts/AppContext/AppContextProvider';
+import React from 'react';
 
-const Pagination = (props: {
-  onChange: (count: number) => void;
-  pagesCount: number;
-  page: number;
-  itemsPerPage: number;
-  paginationClick: () => void;
-}) => {
-  const { onChange, pagesCount, page, itemsPerPage, paginationClick } = props;
+const Pagination = () => {
+  const {
+    changeCountPerPage,
+    pagesCount,
+    page,
+    itemsPerPage,
+    paginationClick,
+  } = React.useContext(Context);
 
   const onChangeValue = (e: ChangeEvent<HTMLSelectElement>) => {
-    onChange(Number(e.target.value));
+    changeCountPerPage(Number(e.target.value));
   };
 
   const pages = [];

@@ -78,3 +78,20 @@ interface IGenres {
 interface IPlatforms<T> {
   platform: T;
 }
+
+export interface IContext {
+  searchQuery?: string;
+  handleInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSubmit?: () => void;
+
+  items?: IResponseItem[];
+  isLoading?: boolean;
+  page?: number;
+  itemsPerPage?: number;
+  changeCountPerPage?: (count: number) => void;
+  count?: number;
+  pagesCount: number;
+  paginationClick?: (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => void;
+}

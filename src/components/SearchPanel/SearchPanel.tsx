@@ -1,13 +1,12 @@
 import classes from './SearchPanel.module.scss';
 import Button from '../Button/Button';
+import React from 'react';
+import { Context } from '../../contexts/AppContext/AppContextProvider';
 
-const SearchPanel = ({
-  searchQuery = '',
-  handleInputChange = () => {}, //e: React.ChangeEvent<HTMLInputElement>
-}) => {
-  const onSubmit = () => {
-    localStorage.setItem('searchQuery', searchQuery);
-  };
+const SearchPanel = () => {
+  const { searchQuery, handleInputChange, onSubmit } =
+    React.useContext(Context);
+
   return (
     <>
       <form className={classes.container}>
