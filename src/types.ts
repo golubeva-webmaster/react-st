@@ -88,10 +88,15 @@ export interface IContext {
   isLoading?: boolean;
   page?: number;
   itemsPerPage?: number;
-  changeCountPerPage?: (count: number) => void;
+  changeCountPerPage?: () => void; //count: number
   count?: number;
   pagesCount: number;
   paginationClick?: (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => void;
+}
+
+export interface IMessage {
+  type: 'info' | 'success' | 'warning' | 'error';
+  text: string;
 }

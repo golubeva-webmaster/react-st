@@ -69,7 +69,7 @@ export const useCreateAppContext = function (props: { searchQuery?: string }) {
   useEffect(() => {
     setPagesCount(Math.ceil(count / itemsPerPage));
     getData();
-  }, [searchQuery, itemsPerPage, count, page, getData]);
+  }, [searchQuery, itemsPerPage, page]); //, count, getData
 
   const onSubmit = () => {
     localStorage.setItem('searchQuery', searchQuery ?? '');

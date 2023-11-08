@@ -1,10 +1,10 @@
 import SearchPanel from '../SearchPanel/SearchPanel';
 import React from 'react';
 import Loader from '../Loader/Loader';
-import SearchResult from '../SearchResult/SearchResult';
+import CardList from '../CardList/CardList';
 import classes from './PageMain.module.scss';
 import { Outlet } from 'react-router-dom';
-import Pagination from '../pagination/Pagination';
+import Pagination from '../Pagination/Pagination';
 import {
   Context,
   AppContextProvider,
@@ -20,7 +20,7 @@ const PageMain = () => {
           <nav>
             <SearchPanel />
             <Pagination />
-            {isLoading ? <Loader /> : <SearchResult />}
+            {isLoading ? <Loader /> : <CardList />}
           </nav>
         </AppContextProvider>
         <section>

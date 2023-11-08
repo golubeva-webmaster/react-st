@@ -11,7 +11,8 @@
     "lint:fix": "eslint . --ext ts,tsx --fix",
     "format:fix": "prettier . --write",
     "format:check": "prettier . --check",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "jest"
   },
   "dependencies": {
     "-": "^0.0.1",
@@ -22,6 +23,8 @@
     "sass": "^1.69.5"
   },
   "devDependencies": {
+    "@testing-library/react": "^14.0.0",
+    "@types/jest": "^29.5.8",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.9.0",
@@ -35,6 +38,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "husky": "^8.0.0",
+    "jest": "^29.7.0",
     "lint-staged": "^15.0.2",
     "prettier": "^3.0.3",
     "typescript": "^5.0.2",
@@ -42,6 +46,7 @@
   },
   "lint-staged": {
     "src/**/*.{ts,tsx,html,css}": "prettier --write",
-    "src/**/*.{ts,tsx}": "eslint --color"
+    "src/**/*.{ts,tsx}": "eslint --color",
+    "*.{test.ts}": "jest"
   }
 }

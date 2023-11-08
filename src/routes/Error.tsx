@@ -1,3 +1,5 @@
-const Error = () => <div>Error</div>;
+import { Message } from '../components/message/Message';
+
+const Error = () => <Message type="error" text="Error." />;
 
 export default Error;
