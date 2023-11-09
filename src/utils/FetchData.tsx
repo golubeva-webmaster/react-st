@@ -17,6 +17,7 @@ export async function getList(
   if (request.ok) {
     const response: IApiResponse = await request.json();
     console.log(response);
+    console.log('getList', response);
     return response;
   }
 }
@@ -28,5 +29,6 @@ export async function getItem(id: string): Promise<IResponseItemDetail> {
 
   if (!request.ok) throw new Error('Something went wrong!');
   const response: IResponseItemDetail = await request.json();
+  console.log('getData', response);
   return response;
 }

@@ -8,7 +8,7 @@ export interface ISearchPanel {
 
 export interface IState {
   searchQuery: string;
-  items: IResponseItem[];
+  items?: IResponseItem[];
   isLoading: boolean;
   hasError: boolean;
 }
@@ -34,14 +34,14 @@ export type IApiResponse = {
 };
 
 export type IResponseItem = {
-  id: number;
-  slug: string;
-  name: string;
-  description: string;
-  background_image: string;
-  genres: IGenres[];
-  platforms: IPlatforms<IGenres>[];
-  tags: ITag[];
+  id?: number;
+  slug?: string;
+  name?: string;
+  description?: string;
+  background_image?: string;
+  genres?: IGenres[];
+  platforms?: IPlatforms<IGenres>[];
+  tags?: ITag[];
 };
 export type IResponseItemDetail = {
   id: number;
@@ -81,16 +81,15 @@ interface IPlatforms<T> {
 
 export interface IContext {
   searchQuery?: string;
-  handleInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onSubmit?: () => void;
-
   items?: IResponseItem[];
   isLoading?: boolean;
   page?: number;
   itemsPerPage?: number;
-  changeCountPerPage?: () => void; //count: number
   count?: number;
   pagesCount: number;
+  onSubmit?: () => void;
+  changeCountPerPage?: () => void;
+  handleInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   paginationClick?: (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => void;

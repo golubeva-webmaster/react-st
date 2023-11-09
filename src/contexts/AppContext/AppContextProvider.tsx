@@ -5,16 +5,23 @@ import { getList } from '../../utils/FetchData';
 
 const contextInitial = {
   searchQuery: '',
-  handleInputChange: () => {}, //e: React.ChangeEvent<HTMLInputElement>
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e);
+  }, //
   onSubmit: () => {},
   page: 1,
   itemsPerPage: 10,
-  changeCountPerPage: () => {}, //count: number
-  items: [],
+  changeCountPerPage: (count: number) => {
+    console.log;
+    count;
+  }, //
+  items: [{}],
   isLoading: false,
   count: 0,
   pagesCount: 0,
-  paginationClick: () => {}, //e: React.ChangeEvent<HTMLElement>
+  paginationClick: (e: React.ChangeEvent<HTMLElement>) => {
+    console.log(e);
+  }, //
 };
 export const Context = React.createContext(contextInitial);
 
@@ -24,19 +31,18 @@ export const AppContextProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const context = useCreateAppContext(props); //создает объект-хранилище.
+  const context = useCreateAppContext(props); //created stre object
   return <Context.Provider value={context}>{children}</Context.Provider>;
 };
 
-//& создадим в провайдере кастомный хук useAppContext, чтобы не экспортировать контекст
-//& и не передавать его каждый раз параметром из компонентов, в которых мы будем использовать стор:
+//& create custom hook useAppContext
 export function useAppContext() {
   const context = React.useContext(Context);
   if (!context) throw new Error('Use app context within provider!');
   return context;
 }
 
-//& Возвращает объект который мы будем хранить в Provider value.
+//& return object we will save in Provider value.
 export const useCreateAppContext = function (props: { searchQuery?: string }) {
   const [searchQuery, setSearchQuery] = useState(
     props.searchQuery || localStorage.getItem('searchQuery') || ''
