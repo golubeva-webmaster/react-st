@@ -6,15 +6,8 @@ import {
   createRoutesFromElements,
   Route,
   RouterProvider,
-  useLocation,
 } from 'react-router-dom';
 import Error from './routes/Error';
-
-export const LocationDisplay = () => {
-  const location = useLocation();
-
-  return <div data-testid="location-display">{location.pathname}</div>;
-};
 
 function App() {
   const router = createBrowserRouter(
@@ -25,12 +18,7 @@ function App() {
     )
   );
 
-  return (
-    <>
-      <RouterProvider router={router} />
-      {/* <LocationDisplay /> */}
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

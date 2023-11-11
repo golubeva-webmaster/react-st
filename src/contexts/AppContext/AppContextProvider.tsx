@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getList } from '../../utils/FetchData';
 
-const contextInitial = {
+export const contextInitial = {
   searchQuery: '',
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e);
@@ -21,7 +21,7 @@ const contextInitial = {
   pagesCount: 0,
   paginationClick: (e: React.ChangeEvent<HTMLElement>) => {
     console.log(e);
-  }, //
+  },
 };
 export const Context = React.createContext(contextInitial);
 
@@ -31,7 +31,7 @@ export const AppContextProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const context = useCreateAppContext(props); //created stre object
+  const context = useCreateAppContext(props);
   return <Context.Provider value={context}>{children}</Context.Provider>;
 };
 

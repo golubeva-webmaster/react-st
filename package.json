@@ -52,7 +52,6 @@
   },
   "lint-staged": {
     "src/**/*.{ts,tsx,html,css}": "prettier --write",
-    "src/**/*.{ts,tsx}": "eslint --color",
-    "src/__tests__/*.test.tsx": "jest"
+    "src/**/*.{ts,tsx}": "eslint --color"
   }
 }

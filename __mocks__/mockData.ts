@@ -1,6 +1,8 @@
+import { IContext } from '../src/types';
+
 export type { IContext, IResponseItem } from '../src/types';
 
-export const mockData = {
+export const mockContext: IContext = {
   searchQuery: 'flower',
   items: [
     {
