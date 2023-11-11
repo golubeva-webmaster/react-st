@@ -1,4 +1,10 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-cd ../ && npm run lint
+# npm run test
+# npm run test && lint // husky - pre-commit hook exited with code 1 (error)
+# npm run test && run lint
+# npm run test && npm run lint
+# npm run test && npm eslint . --ext ts,tsx --fix
+
+npx lint-staged

@@ -7,14 +7,14 @@ const contextInitial = {
   searchQuery: '',
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e);
-  }, //
+  },
   onSubmit: () => {},
   page: 1,
   itemsPerPage: 10,
   changeCountPerPage: (count: number) => {
     console.log;
     count;
-  }, //
+  },
   items: [{}],
   isLoading: false,
   count: 0,
@@ -62,6 +62,7 @@ export const useCreateAppContext = function (props: { searchQuery?: string }) {
     try {
       const fetchedData = await getList(searchQuery, itemsPerPage, page);
       if (fetchedData) {
+        console.log('items', fetchedData.results);
         setItems(fetchedData.results);
         setCount(fetchedData.count);
         setIsLoading(false);
