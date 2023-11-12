@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, createContext } from 'react';
 import { ReactNode } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getList } from '../../utils/FetchData';
@@ -23,7 +23,7 @@ export const contextInitial = {
     console.log(e);
   },
 };
-export const Context = React.createContext(contextInitial);
+export const Context = createContext(contextInitial);
 
 export const AppContextProvider = ({
   children,

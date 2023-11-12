@@ -17,6 +17,7 @@ export const loader = async ({
 
 const Detail = () => {
   const item = (useLoaderData() as IResponseItemDetail) ?? {};
+  console.log(item);
 
   return (
     <>

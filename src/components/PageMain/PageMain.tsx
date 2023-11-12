@@ -7,7 +7,7 @@ import { Outlet } from 'react-router-dom';
 // import Pagination from '../Pagination/Pagination';
 import {
   Context,
-  AppContextProvider,
+  // AppContextProvider,
 } from '../../contexts/AppContext/AppContextProvider';
 
 const PageMain = () => {
@@ -16,13 +16,13 @@ const PageMain = () => {
   return (
     <div className={classes.wrapper}>
       <div className={classes['wrapper-content']}>
-        <AppContextProvider>
-          <nav>
-            <SearchPanel />
-            {/* <Pagination /> */}
-            {isLoading ? <Loader /> : <CardList />}
-          </nav>
-        </AppContextProvider>
+        {/* <AppContextProvider> */}
+        <nav>
+          <SearchPanel />
+          {/* <Pagination /> */}
+          {isLoading ? <Loader /> : <CardList />}
+        </nav>
+        {/* </AppContextProvider> */}
         <section>
           <Outlet />
         </section>
