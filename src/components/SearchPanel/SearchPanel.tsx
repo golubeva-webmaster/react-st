@@ -1,11 +1,10 @@
 import classes from './SearchPanel.module.scss';
-import Button from '../Button/Button';
-import React from 'react';
-import { Context } from '../../contexts/AppContext/AppContextProvider';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { gamesSlice } from '../../store/redusers/GamesSlice';
 
 const SearchPanel = () => {
-  const { searchQuery, handleInputChange, onSubmit } =
-    React.useContext(Context);
+  const { searchQuery } = useAppSelector((state) => state.gamesReducer);
+  const dispatch = useAppDispatch();
 
   return (
     <>
@@ -16,9 +15,9 @@ const SearchPanel = () => {
           className={classes['search-bar']}
           placeholder={searchQuery}
           value={searchQuery}
-          onChange={handleInputChange}
+          onChange={dispatch(gamesSlice.actions.setQuerySelector(value))}
         />
-        <Button text="🔍" onSubmit={onSubmit} />
+        {/* <Button text="🔍" onSubmit={onSubmit} /> */}
       </form>
     </>
   );

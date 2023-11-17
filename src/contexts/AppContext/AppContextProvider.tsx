@@ -62,7 +62,6 @@ export const useCreateAppContext = function (props: { searchQuery?: string }) {
     try {
       const fetchedData = await getList(searchQuery, itemsPerPage, page);
       if (fetchedData) {
-        console.log('items', fetchedData.results);
         setItems(fetchedData.results);
         setCount(fetchedData.count);
         setIsLoading(false);

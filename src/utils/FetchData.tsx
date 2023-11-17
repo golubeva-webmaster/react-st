@@ -29,6 +29,5 @@ export async function getItem(id: string): Promise<IResponseItemDetail> {
 
   if (!request.ok) throw new Error('Something went wrong!');
   const response: IResponseItemDetail = await request.json();
-  console.log('getData', response);
   return response;
 }

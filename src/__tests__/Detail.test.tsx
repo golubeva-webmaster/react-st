@@ -16,16 +16,16 @@ import Detail, { loader } from '../components/Detail/Detail';
 // import PageMain from '../components/PageMain/PageMain';
 // import { AppContextProvider } from '../contexts/AppContext/AppContextProvider';
 
-const item = {
-  id: 24962,
-  slug: 'kirby-canvas-curse',
-  name: 'Kirby: Canvas Curse',
-  name_original: 'Kirby: Canvas Curse',
-  description_raw:
-    'Your DS stylus has been magically infused with the power to paint! When Kirby gets turned into a ball by an evil witch, your hand-drawn rainbow',
-  background_image:
-    '"https://media.rawg.io/media/screenshots/0fa/0fa4d2259a8e658dff0ebb4ab4ab8fc5.jpg"',
-};
+// const item = {
+//   id: 24962,
+//   slug: 'kirby-canvas-curse',
+//   name: 'Kirby: Canvas Curse',
+//   name_original: 'Kirby: Canvas Curse',
+//   description_raw:
+//     'Your DS stylus has been magically infused with the power to paint! When Kirby gets turned into a ball by an evil witch, your hand-drawn rainbow',
+//   background_image:
+//     '"https://media.rawg.io/media/screenshots/0fa/0fa4d2259a8e658dff0ebb4ab4ab8fc5.jpg"',
+// };
 
 describe('Detail', () => {
   beforeAll(() => {
@@ -57,9 +57,7 @@ describe('Detail', () => {
 
   it('Check that a loading indicator is displayed while fetching data', () => {});
 
-  it('Make sure the detailed card component correctly displays the detailed card data', () => {
-    console.log(item);
-  });
+  it('Make sure the detailed card component correctly displays the detailed card data', () => {});
 
   it('Ensure that clicking the close button hides the component', () => {});
 });

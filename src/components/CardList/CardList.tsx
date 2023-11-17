@@ -1,13 +1,12 @@
 import { ReactElement } from 'react';
 import { IResponseItem } from '../../types';
 import classes from './CardList.module.scss';
-import { Context } from '../../contexts/AppContext/AppContextProvider';
-import React from 'react';
 import { Message } from '../message/Message';
 import Card from '../Card/Card';
+import { useAppSelector } from '../../hooks/redux';
 
 const CardList = (): ReactElement => {
-  const { items } = React.useContext(Context);
+  const { items } = useAppSelector((state) => state.gamesReducer);
 
   return (
     <div className={classes.col}>
