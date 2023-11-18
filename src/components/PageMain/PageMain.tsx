@@ -1,10 +1,9 @@
 import SearchPanel from '../SearchPanel/SearchPanel';
-import React from 'react';
 import Loader from '../Loader/Loader';
 import CardList from '../CardList/CardList';
 import classes from './PageMain.module.scss';
 import { Outlet } from 'react-router-dom';
-// import Pagination from '../Pagination/Pagination';
+import Pagination from '../Pagination/Pagination';
 import { useAppSelector } from '../../hooks/redux';
 
 const PageMain = () => {
@@ -15,7 +14,7 @@ const PageMain = () => {
       <div className={classes['wrapper-content']}>
         <nav>
           <SearchPanel />
-          {/* <Pagination /> */}
+          <Pagination />
           {isLoading ? <Loader /> : <CardList />}
         </nav>
         <section>

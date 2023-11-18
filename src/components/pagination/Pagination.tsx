@@ -1,20 +1,23 @@
 import { NavLink } from 'react-router-dom';
 import classes from './Pagination.module.scss';
-import { ChangeEvent } from 'react';
-import { Context } from '../../contexts/AppContext/AppContextProvider';
-import React from 'react';
+import { useAppSelector } from '../../hooks/redux';
+import { useState } from 'react';
+import { gamesAPI } from '../../services/GamesService';
 
 const Pagination = () => {
-  const {
-    changeCountPerPage,
-    pagesCount,
-    page,
-    itemsPerPage,
-    paginationClick,
-  } = React.useContext(Context);
+  const { pagesCount, page, itemsPerPage } = useAppSelector(
+    (state) => state.gamesReducer
+  );
+  // const dispatch = useAppDispatch();
+  const [currentPage, setCurrentPage] = useState(page);
+  const [itemsPP, setItemsPP] = useState(itemsPerPage);
+  const { data /*, error, isLoading, refetch*/ } =
+    gamesAPI.useFetchAllGamesQuery(itemsPP, currentPage);
 
-  const onChangeValue = (e: ChangeEvent<HTMLSelectElement>) => {
-    changeCountPerPage(Number(e.target.value));
+  const onChange = (e) => {
+    console.log(e.target.value);
+    setItemsPP(Number(e.target.value));
+    console.log(data.results);
   };
 
   const pages = [];
@@ -37,7 +40,7 @@ const Pagination = () => {
               : classes.pagination_link
           }
           key={i}
-          onClick={paginationClick}
+          onClick={() => setCurrentPage(i)}
         >
           {i}
         </NavLink>
@@ -57,8 +60,8 @@ const Pagination = () => {
           name="count"
           id="pet-select"
           className={classes.pagination_select}
-          onChange={onChangeValue}
-          value={itemsPerPage}
+          onChange={onChange}
+          value={itemsPP}
         >
           <option value="5">5</option>
           <option value="10">10</option>

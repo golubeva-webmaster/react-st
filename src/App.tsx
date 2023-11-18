@@ -8,33 +8,9 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import Error from './routes/Error';
-import React, { useEffect } from 'react';
-// import { AppContextProvider } from './contexts/AppContext/AppContextProvider';
-// import { gamesSlice } from './store/redusers/GamesSlice';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
 import { fetchGames } from './store/redusers/ActionCreators';
-
-export const contextInitial = {
-  searchQuery: '',
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
-  },
-  onSubmit: () => {},
-  page: 1,
-  itemsPerPage: 10,
-  changeCountPerPage: (count: number) => {
-    console.log;
-    count;
-  },
-  items: [{}],
-  isLoading: false,
-  count: 0,
-  pagesCount: 0,
-  paginationClick: (e: React.ChangeEvent<HTMLElement>) => {
-    console.log(e);
-  },
-};
-export const Context = React.createContext(contextInitial);
 
 function App() {
   const dispatch = useAppDispatch();
@@ -50,10 +26,7 @@ function App() {
         path="/"
         element={
           <>
-            <div>
-              {error && <h1>error</h1>}
-              {/* {JSON.stringify(items)} */}
-            </div>
+            <div>{error && <h1>error</h1>}</div>
             <PageMain />
           </>
         }

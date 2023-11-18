@@ -18,7 +18,7 @@ const initialState: GamesState = {
   items: [{}],
   isLoading: false,
   page: 1,
-  itemsPerPage: 10,
+  itemsPerPage: Number(localStorage.getItem('itemsPerPage')) ?? 10,
   count: 0,
   pagesCount: 0,
   error: '',
@@ -28,23 +28,38 @@ export const gamesSlice = createSlice({
   name: 'games',
   initialState,
   reducers: {
-    gamesFetching(state) {
+    setQuerySelector(state, action: PayloadAction<string>) {
+      state.searchQuery = action.payload;
+    },
+    setPage(state, action: PayloadAction<number>) {
+      state.page = action.payload;
+      console.log('page', action.payload);
+      fetchGames();
+    },
+    setItemsPerPage(state, action: PayloadAction<number>) {
+      state.itemsPerPage = action.payload;
+      console.log('itemsPerPage', action.payload);
+      fetchGames();
+    },
+  },
+  extraReducers: {
+    [fetchGames.fulfilled.type]: (
+      state,
+      action: PayloadAction<IApiResponse>
+    ) => {
+      state.isLoading = false;
+      state.items = action.payload ? action.payload.results : [];
+      state.count = action.payload ? action.payload.count : 0;
+      state.pagesCount = Math.ceil(state.count / state.itemsPerPage);
+    },
+    [fetchGames.pending.type]: (state) => {
+      //, action: PayloadAction<IApiResponse>
       state.isLoading = true;
       state.error = '';
     },
-    gamesFetchingSuccess(state, action: PayloadAction<IApiResponse>) {
-      state.isLoading = false;
-      state.items = action.payload.results;
-    },
-    gamesFetchingError(state, action: PayloadAction<string>) {
+    [fetchGames.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.error = action.payload;
-    },
-    setQuerySelector(state, action: PayloadAction<string>) {
-      console.log('setQuerySelector', action);
-
-      state.searchQuery = action.payload;
-      fetchGames(action.payload);
     },
   },
 });
