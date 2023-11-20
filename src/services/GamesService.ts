@@ -1,12 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
-import { IApiResponse } from '../types';
+import { IApiResponse, IResponseItemDetail } from '../types';
 
-export const apiKey = '9f6cce273c8245fe92a6e6b067205a08';
+const apiKey = '9f6cce273c8245fe92a6e6b067205a08';
+// const apiKey = '4f8ae2877d90437daeb973385d3ea83b';
 
 export const gamesAPI = createApi({
   reducerPath: 'gamesAPI',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://rawg.io/api' }),
   tagTypes: ['Game'],
+
   endpoints: (build) => ({
     gameList: build.query<
       IApiResponse,
@@ -19,6 +21,9 @@ export const gamesAPI = createApi({
           method: 'GET',
         };
       },
+    }),
+    gameDetails: build.query<IResponseItemDetail, string>({
+      query: (id: string) => `/games/${id}?key=${apiKey}`,
     }),
   }),
 });

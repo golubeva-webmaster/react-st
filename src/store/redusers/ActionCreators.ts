@@ -9,8 +9,6 @@ const baseUrl = 'https://rawg.io/api/games';
 export const fetchGames = createAsyncThunk(
   'games/fetchAll',
   async (_, thunkAPI) => {
-    console.log('запрос с API');
-
     const state = thunkAPI.getState();
     const searchQuery = state?.gamesReducer.searchQuery;
     const search = searchQuery ? `&search=${searchQuery}` : ``;

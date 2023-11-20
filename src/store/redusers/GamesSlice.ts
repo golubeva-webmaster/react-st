@@ -11,6 +11,7 @@ interface GamesState {
   count: number;
   pagesCount: number;
   error: string;
+  detailId: number;
 }
 
 const initialState: GamesState = {
@@ -22,6 +23,7 @@ const initialState: GamesState = {
   count: 0,
   pagesCount: 0,
   error: '',
+  detailId: 0,
 };
 
 export const gamesSlice = createSlice({
@@ -31,13 +33,21 @@ export const gamesSlice = createSlice({
     setSearchQuery(state, action: PayloadAction<string>) {
       state.searchQuery = action.payload;
       localStorage.setItem('searchQuery', action.payload ?? '');
-      console.log('state ыуе searchQuery', action.payload);
     },
     setPage(state, action: PayloadAction<number>) {
       state.page = action.payload;
     },
     setItemsPerPage(state, action: PayloadAction<number>) {
       state.itemsPerPage = action.payload;
+    },
+    setItems(state, action: PayloadAction<IResponseItem[]>) {
+      state.items = action.payload;
+    },
+    setCount(state, action: PayloadAction<number>) {
+      state.count = action.payload;
+    },
+    setDetailId(state, action: PayloadAction<number>) {
+      state.detailId = action.payload;
     },
   },
   extraReducers: {

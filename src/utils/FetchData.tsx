@@ -9,15 +9,12 @@ export async function getList(
   page: number
 ): Promise<IApiResponse | void> {
   const search = queryStr ? `&search=${queryStr}` : ``;
-  // console.log('getList ');
   const request = await fetch(
     `${baseUrl}?token&key=${apiKey}${search}&ordering=-metacritic&page_size=${page_size}&page=${page}`
   );
 
   if (request.ok) {
     const response: IApiResponse = await request.json();
-    // console.log(response);
-    // console.log('getList', response);
     return response;
   }
 }

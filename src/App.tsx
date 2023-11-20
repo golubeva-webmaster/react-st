@@ -1,5 +1,5 @@
 import './App.module.scss';
-import Detail, { loader } from './components/Detail/Detail';
+import Detail from './components/Detail/Detail';
 import PageMain from './components/PageMain/PageMain';
 import {
   createBrowserRouter,
@@ -32,7 +32,7 @@ function App() {
         }
         errorElement={<Error />}
       >
-        <Route path="detail/:id" element={<Detail />} loader={loader} />
+        <Route path="detail/:id" element={<Detail />} />
       </Route>
     )
   );

@@ -7,10 +7,11 @@ const Pagination = () => {
   const dispatch = useAppDispatch();
 
   //& берем из стейта
-  const { pagesCount, page, itemsPerPage } = useAppSelector(
+  const { page, itemsPerPage, count } = useAppSelector(
     (state) => state.gamesReducer
   );
 
+  const pagesCount = Math.round(count / itemsPerPage);
   const pages = [];
   for (let i = 1; i < pagesCount; i++) {
     if (
