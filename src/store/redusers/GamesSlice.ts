@@ -28,18 +28,16 @@ export const gamesSlice = createSlice({
   name: 'games',
   initialState,
   reducers: {
-    setQuerySelector(state, action: PayloadAction<string>) {
+    setSearchQuery(state, action: PayloadAction<string>) {
       state.searchQuery = action.payload;
+      localStorage.setItem('searchQuery', action.payload ?? '');
+      console.log('state ыуе searchQuery', action.payload);
     },
     setPage(state, action: PayloadAction<number>) {
       state.page = action.payload;
-      console.log('page', action.payload);
-      fetchGames();
     },
     setItemsPerPage(state, action: PayloadAction<number>) {
       state.itemsPerPage = action.payload;
-      console.log('itemsPerPage', action.payload);
-      fetchGames();
     },
   },
   extraReducers: {

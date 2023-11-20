@@ -2,16 +2,13 @@ import classes from './SearchPanel.module.scss';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { gamesSlice } from '../../store/redusers/GamesSlice';
 import Button from '../Button/Button';
-import { fetchGames } from '../../store/redusers/ActionCreators';
+import { useState } from 'react';
 
 const SearchPanel = () => {
   const { searchQuery } = useAppSelector((state) => state.gamesReducer);
   const dispatch = useAppDispatch();
 
-  const onSubmit = () => {
-    localStorage.setItem('searchQuery', searchQuery ?? '');
-    dispatch(fetchGames()); //searchQuery
-  };
+  const [localSearchQuery, setLocalSearchQuery] = useState(searchQuery);
 
   return (
     <>
@@ -21,12 +18,15 @@ const SearchPanel = () => {
           id="search-bar"
           className={classes['search-bar']}
           placeholder={searchQuery}
-          value={searchQuery}
-          onChange={(event) =>
-            dispatch(gamesSlice.actions.setQuerySelector(event.target.value))
+          value={localSearchQuery}
+          onChange={(event) => setLocalSearchQuery(event.target.value)}
+        />
+        <Button
+          text="🔍"
+          onSubmit={() =>
+            dispatch(gamesSlice.actions.setSearchQuery(localSearchQuery ?? ''))
           }
         />
-        <Button text="🔍" onSubmit={onSubmit} />
       </form>
     </>
   );

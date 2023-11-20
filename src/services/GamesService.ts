@@ -8,16 +8,17 @@ export const gamesAPI = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'https://rawg.io/api' }),
   tagTypes: ['Game'],
   endpoints: (build) => ({
-    fetchAllGames: build.query<IApiResponse, number>({
-      query: (itemsPerPage = 5, page = 2) => ({
-        url: `/games?key=${apiKey}`,
-        params: {
-          //todo добавить другие параметры
-          page_size: itemsPerPage,
-          page: page,
-        },
-      }),
-      providesTags: () => ['Game'],
+    gameList: build.query<
+      IApiResponse,
+      { page_size: number; page: number; search: string }
+    >({
+      query(params = { page_size: 10, page: 1, search: '' }) {
+        return {
+          url: `/games?key=${apiKey}`,
+          params,
+          method: 'GET',
+        };
+      },
     }),
   }),
 });
